@@ -340,6 +340,7 @@ class TestExportFilterPreservation(AdminTestMixin, TestCase):
         }
 
         # POST to the export URL that should have preserved filters
+        self._prepend_form_prefix(export_data)
         # Suppress the deprecation warning for get_valid_export_item_pks
         with warnings.catch_warnings():
             warnings.filterwarnings(

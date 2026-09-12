@@ -917,11 +917,14 @@ class ExportActionMixin(ExportMixin):
 
         return render(request, "admin/import_export/export.html", context=context)
 
-    def get_actions(self, request):
+    def get_actions(self, request, action_location=None):
         """
         Adds the export action to the list of available actions.
         """
-        actions = super().get_actions(request)
+        kwargs = {}
+        if action_location is not None:
+            kwargs['action_location'] = action_location
+        actions = super().get_actions(request, **kwargs)
         if self.has_export_permission(request):
             actions.update(
                 export_admin_action=(
