@@ -248,9 +248,7 @@ class ImportMixin(BaseImportMixin, ImportExportMixinBase):
     def add_success_message(self, result, request):
         opts = self.model._meta
 
-        success_message = _(
-            "Import finished, with {} new and " "{} updated {}."
-        ).format(
+        success_message = _("Import finished, with {} new and {} updated {}.").format(
             result.totals[RowResult.IMPORT_TYPE_NEW],
             result.totals[RowResult.IMPORT_TYPE_UPDATE],
             opts.verbose_name_plural,
@@ -753,7 +751,8 @@ class ExportMixin(BaseExportMixin, ImportExportMixinBase):
 
         cl = ExportChangeList(**changelist_kwargs)
 
-        # get_queryset() is already called during initialization, it is enough to get it's results
+        # get_queryset() is already called during initialization, it is enough to
+        # get it's results
         if hasattr(cl, "queryset"):
             return cl.queryset
 
